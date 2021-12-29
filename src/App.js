@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Foto from './Foto.jpg'; 
+class App extends Component
+{
+  state = { fullName: 'salem bouaziz ',
+  bio: 'master ',
+  imSrc: Foto ,
+  profession: 'manager ', 
+  show: false,
+  digit:0, }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  componentWillMount = () => {
+    setInterval(() => {
+      this.setState(prevState => ({
+      digit: prevState.digit + 1,
+    }));
+  }, 1000);
+  }
+  showContent = () => {
+    if (this.state.show == true) {
+      this.setState({ show: false });
+    } else {
+      this.setState({ show: true });
+    }
+  };
+  render() {
+    return (
+      <div>
+              <button onClick={this.showContent}>show</button>
+        {this.state.show ? (
+          <div>
+            {this.state.fullName} <br/>
+            {this.state.bio } <br/>
+            {this.state.profession} <br/>
+       <img src={this.state.imSrc} alt= 'Foto' width= '300' height= '300' />
+             <br/>
+             <h1> counter: {this.state.digit} </h1>
+          </div>
+        ) : null}
+
+      </div>
+    );
+  };
 }
-
 export default App;
